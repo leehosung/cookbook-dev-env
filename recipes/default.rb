@@ -10,6 +10,7 @@
 include_recipe 'python'
 include_recipe 'git::default'
 
+# vi
 directory "/home/#{node['dev-env']['user']}/.vim" do
   owner node['dev-env']['user']
   group node['dev-env']['group']
@@ -40,4 +41,11 @@ bash "install-vundle" do
   code <<-EOH
     vim +BundleInstall +qall
     EOH
+end
+
+# screen
+template "/home/#{node['dev-env']['user']}/.screenrc" do
+  source "screenrc.erb"
+  owner node['dev-env']['user']
+  group node['dev-env']['group']
 end
